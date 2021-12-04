@@ -1,8 +1,8 @@
 const { httpGet } = require("./mock-http-interface");
 
 /**
- * This is a helper function helps to extend to
- * have different property names based on the status code.
+ * This helper function helps to extend
+ * different property names based on the status code.
  * @param {number} status
  * return {string} property name
  */
