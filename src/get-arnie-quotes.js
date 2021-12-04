@@ -1,5 +1,23 @@
 const { httpGet } = require("./mock-http-interface");
 
+/**
+ * This is a helper function helps to extend to
+ * have different property names based on the status code.
+ * @param {number} status
+ * return {string} property name
+ */
+const getPropertyName = (status) => {
+  switch (status) {
+    case 500:
+      return "FAILURE";
+    case 200:
+    default:
+      return "Arnie Quote";
+  }
+};
+
+const getMessage = (response) => JSON.parse(response.body)?.message;
+
 const getArnieQuotes = async (urls) => {
   // TODO: Implement this function.
   const results = await Promise.all(
@@ -7,14 +25,10 @@ const getArnieQuotes = async (urls) => {
       try {
         const response = await httpGet(url);
         return {
-          [response.status === 200 ? "Arnie Quote" : "FAILURE"]: JSON.parse(
-            response.body
-          )?.message,
+          [getPropertyName(response.status)]: getMessage(response),
         };
       } catch (e) {
-        return {
-          FAILURE: e.message,
-        };
+        return { FAILURE: e.message };
       }
     })
   );
