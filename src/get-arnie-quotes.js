@@ -16,8 +16,18 @@ const getPropertyName = (status) => {
   }
 };
 
+/**
+ *
+ * @param {API Response} response
+ * @returns JSON parsed response
+ */
 const getMessage = (response) => JSON.parse(response.body)?.message;
 
+/**
+ *
+ * @param {string} urls
+ * @returns Array of response
+ */
 const getArnieQuotes = async (urls) => {
   // TODO: Implement this function.
   const results = await Promise.all(
