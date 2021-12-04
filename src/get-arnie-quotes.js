@@ -1,8 +1,25 @@
-const { httpGet } = require('./mock-http-interface');
+const { httpGet } = require("./mock-http-interface");
 
 const getArnieQuotes = async (urls) => {
   // TODO: Implement this function.
-  // return results;
+  const results = await Promise.all(
+    urls.map(async (url) => {
+      try {
+        const response = await httpGet(url);
+        return {
+          [response.status === 200 ? "Arnie Quote" : "FAILURE"]: JSON.parse(
+            response.body
+          )?.message,
+        };
+      } catch (e) {
+        return {
+          FAILURE: e.message,
+        };
+      }
+    })
+  );
+
+  return results;
 };
 
 module.exports = {
