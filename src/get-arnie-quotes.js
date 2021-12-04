@@ -29,7 +29,7 @@ const getMessage = (response) => JSON.parse(response.body)?.message;
  * @returns Array of response
  */
 const getArnieQuotes = async (urls) => {
-  // TODO: Implement this function.
+  // capture an array of responses
   const results = await Promise.all(
     urls.map(async (url) => {
       try {
